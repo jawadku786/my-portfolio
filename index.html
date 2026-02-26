@@ -401,6 +401,23 @@ section {
   );
 }
 
+.navbar-toggler-icon {
+  filter: invert(1);
+}
+
+/* Hidden before scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(80px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* Visible when triggered */
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 
 
     /* Glass Card */
@@ -1655,6 +1672,24 @@ What drives me is the challenge of  <span style="color: #38bdf8;">solving meanin
   /* Light / Dark mode toggle */
   const toggleBtn = document.getElementById('themeToggle');
   let darkMode = true;
+
+
+const reveals = document.querySelectorAll(".reveal");
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("active");
+    }
+  });
+}, {
+  threshold: 0.2
+});
+
+reveals.forEach(reveal => {
+  observer.observe(reveal);
+});
+
 
 </script>
 </body>
